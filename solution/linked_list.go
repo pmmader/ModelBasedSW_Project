@@ -218,7 +218,8 @@ func main() {
 	b := 5
 	fmt.Printf("Example Implementation")
 	testNode()
-	fmt.Printf("\nMonorization, only int because mono")
+	fmt.Printf("\nMonomorphization, only int because go does not allow functions with the same name but different parameters")
+	//The duplication problem could be solved by changing the names of the functions, but that would somewhat defeat the purpuse of generic methodes. To circumvent that one would need to write a mapper function, or something similar.
 	testNode_mono()
 	fmt.Printf("\nGenerics")
 	testNode_gen()
@@ -235,6 +236,7 @@ func main() {
 	swap_mono(&a, &b)
 	fmt.Printf("\na=%d, b=%d", a, b)
 	fmt.Printf("\nswap gen not possible, because *int does not implement *interface{}")
-	//swap_gen(&a, &b)
-	//fmt.Printf("\na=%d, b=%d", a, b)
+	/*var c *interface{} = &a;
+	swap_gen(c, d)
+	fmt.Printf("\na=%d, b=%d", a, b)*/
 }
