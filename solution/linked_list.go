@@ -215,7 +215,7 @@ func sum[T int | float32](xs []T) T {
 
 }
 
-// Example summing up numeric values Monorization
+// Example summing up numeric values Monomorphization
 func sum_mono_int(xs []int) int {
 	var x int
 	x = 0
@@ -262,8 +262,14 @@ func swap[T any](x *T, y *T) {
 	*y = tmp
 }
 
-// Example swap Monorization
-func swap_mono(x *int, y *int) {
+// Example swap Monomorphization
+func swap_mono_int(x *int, y *int) {
+	tmp := *x
+	*x = *y
+	*y = tmp
+}
+
+func swap_mono_float32(x *float32, y *float32) {
 	tmp := *x
 	*x = *y
 	*y = tmp
@@ -281,6 +287,8 @@ func main() {
 	float_nums := []float32{1.0, 2.0, 3.0, 4.0, 5.0}
 	a := 3
 	b := 5
+	var c float32 = 3.14159265
+	var d float32 = 2.81
 	fmt.Printf("Example Implementation: testNode")
 	testNode()
 	fmt.Printf("\nMonomorphization for int: testNode_mono_int")
@@ -300,11 +308,16 @@ func main() {
 	fmt.Printf("\nswap example")
 	swap(&a, &b)
 	fmt.Printf("\na=%d, b=%d", a, b)
-	fmt.Printf("\nswap mono")
-	swap_mono(&a, &b)
+	fmt.Printf("\nswap mono int")
+	swap_mono_int(&a, &b)
 	fmt.Printf("\na=%d, b=%d", a, b)
+	fmt.Printf("\na=%f, b=%f", c, d)
+	fmt.Printf("\nswap mono float")
+	swap_mono_float32(&c, &d)
+	fmt.Printf("\na=%f, b=%f", c, d)
 	fmt.Printf("\nswap gen not possible, because *int does not implement *interface{}")
 	/*var c *interface{} = &a;
 	swap_gen(c, d)
 	fmt.Printf("\na=%d, b=%d", a, b)*/
+	fmt.Printf("\n")
 }
