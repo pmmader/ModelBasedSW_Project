@@ -56,10 +56,10 @@ func testNode() {
 // Example linked list translated by Monomorphization
 type node_mono_int struct {
 	val  int
-	next *node_mono
+	next *node_mono_int
 }
 
-func mkNode_mono_int(v int) *node_mono {
+func mkNode_mono_int(v int) *node_mono_int {
 	return &node_mono_int{val: v, next: nil}
 }
 
@@ -105,11 +105,11 @@ func testNode_mono_int() {
 
 type node_mono_bool struct {
 	val  bool
-	next *node_mono
+	next *node_mono_bool
 }
 
-func mkNode_mono_bool(v int) *node_mono_bool {
-	return &node_mono_boolval: v, next: nil}
+func mkNode_mono_bool(v bool) *node_mono_bool {
+	return &node_mono_bool{val: v, next: nil}
 }
 
 func insert_mono_bool(n *node_mono_bool, v bool) {
@@ -145,9 +145,9 @@ func len_mono_bool(n *node_mono_bool) int {
 }
 
 func testNode_mono_bool() {
-	n1 := mkList_mono_bool(10, 1)
+	n1 := mkList_mono_bool(10, true)
 	fmt.Printf("\n%d", len_mono_bool(n1))
-
+}
 
 
 
@@ -278,19 +278,23 @@ func swap_gen(x *interface{}, y *interface{}) {
 
 func main() {
 	nums := []int{1, 2, 3, 4, 5}
+	float_nums := []float32{1.0, 2.0, 3.0, 4.0, 5.0}
 	a := 3
 	b := 5
-	fmt.Printf("Example Implementation")
+	fmt.Printf("Example Implementation: testNode")
 	testNode()
-	fmt.Printf("\nMonomorphization, only int because go does not allow functions with the same name but different parameters")
-	//The duplication problem could be solved by changing the names of the functions, but that would somewhat defeat the purpuse of generic methodes. To circumvent that one would need to write a mapper function, or something similar.
-	testNode_mono()
-	fmt.Printf("\nGenerics")
+	fmt.Printf("\nMonomorphization for int: testNode_mono_int")
+	testNode_mono_int()
+	fmt.Printf("\nMonomorphization for bool: testNode_mono_bool")
+	testNode_mono_bool()
+	fmt.Printf("\nGenerics: testNode_gen")
 	testNode_gen()
 	fmt.Printf("\nsum example")
 	fmt.Printf("\n%d", sum(nums))
-	fmt.Printf("\nsum mono")
-	fmt.Printf("\n%d", sum_mono(nums))
+	fmt.Printf("\nsum mono int")
+	fmt.Printf("\n%d", sum_mono_int(nums))
+	fmt.Printf("\nsum mono float32")
+	fmt.Printf("\n%f", sum_mono_float32(float_nums))
 	fmt.Printf("\nsum generics is not possible, because interface{} does not have a definitaion for the +-operator")
 	fmt.Printf("\nBefore swaps a=%d, b=%d", a, b)
 	fmt.Printf("\nswap example")
