@@ -284,7 +284,6 @@ func main() {
 	fmt.Printf("Example Implementation: testNode")
 	testNode()
 	fmt.Printf("\nMonomorphization for int: testNode_mono_int")
-	//The duplication problem could be solved by changing the names of the functions, but that would somewhat defeat the purpuse of generic methodes. To circumvent that one would need to write a mapper function, or something similar.
 	testNode_mono_int()
 	fmt.Printf("\nMonomorphization for bool: testNode_mono_bool")
 	testNode_mono_bool()
